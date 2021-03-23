@@ -1,6 +1,6 @@
 {
   "name": "@danieldsf/csv-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CSV library that allows reading and writing CSVs.",
   "main": "index.js",
   "scripts": {
