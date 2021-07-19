@@ -1,43 +1,43 @@
-# CSV Utils
+# Text File Utils
 
-> A small set of CSV utilities
+> A small set of Text file utilities
 
-This is a node.js project that aims provides a simple interface that allow developers to read and write CSV/Text files.
+This is a node.js project that aims provides a simple interface that allow developers to read and write CSV/Text/Json files.
 
 # Installation
 
-`npm install @danieldsf/csv-utils`
+`yarn add text-file-utils`
 
 # Example
 
 Read a file in the current directory ("test.csv") and retrieve its headers.
 
 ```js
-const path = require('path');
-const { readCSV, readCSVHeaders } = require('@danieldsf/csv-utils');
+import path from 'path'
+import { readCSV, readCSVHeaders } from 'text-file-utils'
 
-const filepath = path.join(__dirname, "test.csv");
+var filepath = path.join(__dirname, "test.csv")
 
 (async () => {
-  const content = await readCSV(filepath);
-  const headers = await readCSVHeaders(filepath);
+  let content = await readCSV(filepath);
+  let headers = await readCSVHeaders(filepath);
   // Output the results:
-  console.log('Content: ', content);
-  console.log('Headers: ', headers);
-})();
+  console.log('Content: ', content)
+  console.log('Headers: ', headers)
+})()
 ```
 
 
 # Methods
 
-## readText
+## readTextSync
 
-readText is a method that opens a text-file and return a list of non-empty lines as array.
+readTextSync is a method that opens a text-file and return a list of non-empty lines as array.
 
 ##### Example:
 
 ```js
-let items = await readText(path);
+let items = readTextSync(path)
 ```
 
 Where path is the current path of the file you desire to open.
@@ -49,7 +49,7 @@ readCSV is a method that opens a CSV file and returns a list of items as an arra
 ##### Example:
 
 ```js
-let items = await readCSV(path);
+let items = await readCSV(path)
 ```
 
 Where path is the current path of the CSV file you desire to open.
@@ -61,19 +61,19 @@ readCSVHeaders is a method that opens a CSV file and return a list of columns as
 ##### Example:
 
 ```js
-let columns = await readCSVHeaders(path);
+let columns = await readCSVHeaders(path)
 ```
 
 Where path is the current path of the file you desire to open.
 
 ## writeCSV
 
-writeCSV is a method that stores a list of dicts into a CSV file and returns its path after finishing the operation.
+writeCSV is a method that stores a list of dicts into a CSV file and returns true if the operation was performed with no errors.
 
 ##### Example:
 
 ```js
-let storedCSVPath = await writeCSV(path, data, headers?);
+let wasStored = await writeCSV(path, data, headers?)
 ```
 
 Where there are multiple params such as:
@@ -81,14 +81,28 @@ Where there are multiple params such as:
 - data: the list of items that are going to be inserted in the file.
 - headers: the list of columns are going to be used to generate the CSV file.
 
-## writeText
+## writeTextSync
 
-writeCSV is a method that stores a list of dicts into a CSV file and returns its path after finishing the operation.
+writeTextSync is a method that stores a list of dicts into a CSV file and returns true if the operation was performed with no errors.
 
 ##### Example:
 
 ```js
-let storedTextPath = await writeText(path, data);
+let wasStored = writeTextSync(path, data)
+```
+
+Where there are multiple params such as:
+- path: the path of the file you desire to generate.
+- data: the list of items that are going to be inserted in the file.
+
+## writeJsonSync
+
+writeJsonSync is a method that stores a list of dicts into a JSON file and returns true if the operation was performed with no errors.
+
+##### Example:
+
+```js
+let wasStored = writeJsonSync(path, data)
 ```
 
 Where there are multiple params such as:
