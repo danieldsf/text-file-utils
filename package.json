@@ -1,6 +1,6 @@
 {
   "name": "text-file-utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "repository": "git@github.com:IonDevOrg/text-file-utils.git",
   "author": "Daniel Farias <daniel.dsfarias@gmail.com>",
   "license": "MIT",
