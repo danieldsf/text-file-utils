@@ -4,41 +4,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readCSVHeaders = exports.readTextSync = exports.readCSV = exports.listFilesFromDir = void 0;
-var fs_1 = __importDefault(require("fs"));
-var csv_parser_1 = __importDefault(require("csv-parser"));
+const fs_1 = __importDefault(require("fs"));
+const csv_parser_1 = __importDefault(require("csv-parser"));
 function listFilesFromDir(path) {
-    return fs_1.default.readdirSync(path).map(function (file) {
-        return path + "/" + file;
+    return fs_1.default.readdirSync(path).map(file => {
+        return `${path}/${file}`;
     });
 }
 exports.listFilesFromDir = listFilesFromDir;
 function readCSV(path) {
-    var results = [];
-    return new Promise(function (resolve, reject) {
+    let results = [];
+    return new Promise((resolve, reject) => {
         fs_1.default.createReadStream(path)
             .pipe(csv_parser_1.default())
-            .on('data', function (data) { return results.push(data); })
-            .on('end', function () {
+            .on('data', (data) => results.push(data))
+            .on('end', () => {
             resolve(results);
         })
-            .on('error', function (err) {
+            .on('error', (err) => {
             reject(err);
         });
     });
 }
 exports.readCSV = readCSV;
 function readTextSync(path) {
-    return fs_1.default.readFileSync(path).toString().split("\n").filter(function (x) { return x.trim(); }).map(function (x) { return x.trim(); });
+    return fs_1.default.readFileSync(path).toString().split("\n").filter(x => x.trim()).map(x => x.trim());
 }
 exports.readTextSync = readTextSync;
 function readCSVHeaders(path) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         fs_1.default.createReadStream(path)
             .pipe(csv_parser_1.default())
-            .on('headers', function (headers) {
+            .on('headers', (headers) => {
             resolve(headers);
         })
-            .on('error', function (err) {
+            .on('error', (err) => {
             reject(err);
         });
     });
